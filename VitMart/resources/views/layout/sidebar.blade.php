@@ -6,7 +6,7 @@
           <a href="../index.html" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="{{ asset("/assets/img/AdminLTELogo.png") }}"
+              src="{{ asset("/assets/assets/img/AdminLTELogo.png") }}"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -52,13 +52,19 @@
                   <li class="nav-item">
                     <a href="{{ url("/fakultas") }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i> 
-                      <p>List Produk</p>
+                      <p>Makanan</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{ url("/fakultas/create") }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Create Produk</p>
+                      <p>Minuman</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url("/fakultas") }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i> 
+                      <p>Kesehatan</p>
                     </a>
                   </li>
                 </ul>

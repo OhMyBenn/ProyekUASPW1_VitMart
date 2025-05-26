@@ -29,7 +29,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link" data-bs-toggle="dropdown" href="#">
                 <i class="bi bi-bell-fill"></i>
-                <span class="navbar-badge badge text-bg-warning">15</span>
+                <span class="navbar-badge badge text-bg-primary">15</span>
               </a>
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -60,7 +60,7 @@
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img
-                  src="{{ asset("assets/img/user2-160x160.jpg") }}"
+                  src="{{ asset("assets/assets/img/user2-128x128.jpg") }}"
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
