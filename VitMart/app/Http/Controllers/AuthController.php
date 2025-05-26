@@ -4,56 +4,80 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    // Tampilkan form login
-    public function showLogin()
-    {
-        return view('auth.login');
-    }
+    function login(){
+        $user = Auth::user();
 
-    // Proses login
-    public function do_login(Request $request)
-    {
-        // Contoh validasi sederhana, sesuaikan dengan kebutuhan
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if (auth()->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/'); // atau halaman setelah login
+        //jik user sudah login
+        if($user){
+            //cek level
+            if($user->level == 'admin'){
+                return redirect()->intended('admin');
+            }else if($user->level == 'user'){
+                return redirect()->intended('user');
+            }
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah',
-        ])->withInput();
+        return view('login');
     }
 
-    // Tampilkan form register
-    public function showRegister()
-    {
-        
-        return view('auth.register');
-    }
-
-    // Proses register
-    public function do_register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+    function do_login(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8'
         ]);
+        //menyiapkan variabel cridentials
+        $credentials = $request->only('email', 'password');
 
-        if ($validator->fails()) {
+        //cek cridentials ke tabel users meggunakan Auth
+        if(Auth::attempt($credentials)){
+            //jika berhasil login
+            //cek level user
+            $user = Auth::user();
+            if($user->level == 'admin'){
+                return redirect()->intended('admin');
+            }else if($user->level == 'user'){
+                return redirect()->intended('user');
+            }
+            return redirect()->intended('/');
+        }
+
+    function showLogin(){
+
+        return view('login');  
+
+    }
+
+        //jika login gagal
+        return redirect('login')
+            ->withErrors([
+                'failed' => 'User tidak ditemukan atau password yang anda masukkan salah'
+            ])
+            ->withInput();
+    }
+
+    function register(){
+        return view("register");
+    }
+
+    function do_register(Request $request){
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:8'
+            ]
+        );
+        if($validator->fails()){
             return redirect("register")
-                ->withErrors($validator)
-                ->withInput();
+            ->withErrors($validator)
+            ->withInput();    
         }
 
         $user = new User();
@@ -63,6 +87,12 @@ class AuthController extends Controller
         $user->level = 'user';
         $user->save();
 
-        return redirect('login')->with('success', 'Registrasi berhasil, silakan login.');
+        return redirect('login');
     }
+
+    function logout(){
+        Auth::logout();
+        return redirect('login');
+    }
+
 }
