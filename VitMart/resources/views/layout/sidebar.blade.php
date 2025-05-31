@@ -6,9 +6,11 @@
           <a href="../index.html" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="{{ asset("/assets/assets/img/AdminLTELogo.png") }}"
+              src="{{ asset("/assets/assets/img/VitMartLogo.png") }}"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
+              style="width: 45px; height: 190px; border-radius: 50%;"
+              data-lte-toggle="sidebar-brand-image"
             />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->

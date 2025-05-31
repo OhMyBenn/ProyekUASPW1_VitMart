@@ -13,7 +13,7 @@ class AuthController extends Controller
     function login(){
         $user = Auth::user();
 
-        //jik user sudah login
+        //jika user sudah login
         if($user){
             //cek level
             if($user->level == 'admin'){
