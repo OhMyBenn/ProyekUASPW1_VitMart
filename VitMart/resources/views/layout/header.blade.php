@@ -75,7 +75,7 @@
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary">
                   <img
-                    src="{{ asset("/assets/assets/img/user2-128x128.jpg") }}"
+                    src="{{ asset("/assets/assetsz/img/user2-128x128.jpg") }}"
                     class="rounded-circle shadow"
                     alt="User Image"
                   />
